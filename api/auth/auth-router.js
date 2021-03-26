@@ -1,7 +1,17 @@
 const router = require('express').Router();
+const bcryptjs = require("bcryptjs");
+const jwt = require('jsonwebtoken');
+const { checkUsernameAlreadyExists } = require('./auth-middleware')
+const { add,findBy } = require('../users/users-model')
 
-router.post('/register', (req, res) => {
-  res.end('implement register, please!');
+router.post('/register',checkUsernameAlreadyExists, (req, res,next) => {
+  //res.end('implement register, please!');
+
+  const credentials = req.body;
+  const rounds = process.env.BCRYPT_ROUNDS || 8;
+  const hash = bcryptjs.hashSync(credentials.password, rounds);
+  credentials.password = hash;
+
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
