@@ -19,4 +19,10 @@ server.use('/api/auth', authRouter);
 server.use('/api/jokes', restrict, jokesRouter); // only logged-in users should have access!
 server.use("/api/users", usersRouter);
 
+server.get('/', (req,res)=> {
+    res.status(200).json({
+        message: 'api up'
+    })
+})
+
 module.exports = server;
