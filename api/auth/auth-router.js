@@ -5,7 +5,7 @@ const { checkUsernameAlreadyExists, validateRequest, checkUsernameExists } = req
 const Users = require('../users/users-model')
 const { JWT_SECRET } = require('../../config/secrets')
 
-router.post('/register',checkUsernameAlreadyExists,validateRequest, (req, res,next) => {
+router.post('/register',checkUsernameAlreadyExists,validateRequest, (req, res, next) => {
 
   const credentials = req.body;
   const rounds = process.env.BCRYPT_ROUNDS || 8;
